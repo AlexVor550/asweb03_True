@@ -23,6 +23,7 @@
 Выполнение
 
 Скачиваю [CMS Wordpress](https://wordpress.org/) и распаковаваю в папку `site`.В папке `site` появляется папка `wordpress` с исходным кодом сайта.
+
 <img width="616" alt="2023-06-02 22_14_15-site" src="https://github.com/AlexVor550/asweb03_Updated/assets/107479058/768fa155-1fb6-4967-852e-22a4cd8e29c9">
 
 
@@ -50,6 +51,7 @@ docker rm httpd
 
 
 В созданом файле `.\files\httpd\httpd.conf` раскоментирую строки, содержащие подключение расширений `mod_proxy.so`, `mod_proxy_http.so`, `mod_proxy_fcgi.so`.
+
 <img width="469" alt="2023-06-02 22_31_16-httpd conf - Visual Studio Code" src="https://github.com/AlexVor550/asweb03_Updated/assets/107479058/f259fe0a-4c9c-47ab-9d99-448573f99398">
 
 
@@ -63,6 +65,8 @@ ProxyPassMatch ^/(.*\.php(/.*)?)$ fcgi://php-fpm:9000/var/www/html/$1
 # индексный файл
 DirectoryIndex /index.php index.php
 ```
+<img width="430" alt="2023-06-02 22_45_13-httpd conf - Visual Studio Code" src="https://github.com/AlexVor550/asweb03_Updated/assets/107479058/19aea63f-98a0-4d0d-9daa-c44e7f122417">
+
 
 Также нахожу определение параметра `DocumentRoot` и задаю ему значение `/var/www/html`, как и в следующей за параметром строке.
 
