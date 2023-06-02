@@ -23,6 +23,8 @@
 Выполнение
 
 Скачиваю [CMS Wordpress](https://wordpress.org/) и распаковаваю в папку `site`.В папке `site` появляется папка `wordpress` с исходным кодом сайта.
+<img width="616" alt="2023-06-02 22_14_15-site" src="https://github.com/AlexVor550/asweb03_Updated/assets/107479058/768fa155-1fb6-4967-852e-22a4cd8e29c9">
+
 
 Контейнер Apache HTTP Server
 
@@ -35,14 +37,21 @@ docker run -d --name httpd  httpd:2.4
 # копируем конфигурационный файл из контейнера в папку .\files\httpd
 docker cp httpd:/usr/local/apache2/conf/httpd.conf .\files\httpd\httpd.conf
 
+<img width="696" alt="2023-06-02 22_27_59-Editing asweb03_Updated_README md at main · AlexVor550_asweb03_Updated · GitHub " src="https://github.com/AlexVor550/asweb03_Updated/assets/107479058/60a96a9f-3ed5-4b10-8cbc-9300e32a1924">
+
 # останавливаем контейнер httpd
 docker stop httpd
 
 # удаляем контейнер
 docker rm httpd
+
+<img width="255" alt="2023-06-02 22_26_56-asweb03 containers vhosts ru (2) md - Visual Studio Code" src="https://github.com/AlexVor550/asweb03_Updated/assets/107479058/199de0ee-43c3-4e37-96e8-528f88cd2703">
 ```
 
+
 В созданом файле `.\files\httpd\httpd.conf` раскоментирую строки, содержащие подключение расширений `mod_proxy.so`, `mod_proxy_http.so`, `mod_proxy_fcgi.so`.
+<img width="469" alt="2023-06-02 22_31_16-httpd conf - Visual Studio Code" src="https://github.com/AlexVor550/asweb03_Updated/assets/107479058/f259fe0a-4c9c-47ab-9d99-448573f99398">
+
 
 В конфигурационном файле объявление параметра `ServerName`. Под ним добавляю следующие строки:
 
@@ -56,6 +65,9 @@ DirectoryIndex /index.php index.php
 ```
 
 Также нахожу определение параметра `DocumentRoot` и задаю ему значение `/var/www/html`, как и в следующей за параметром строке.
+
+<img width="234" alt="2023-06-02 22_36_13-httpd conf - Visual Studio Code" src="https://github.com/AlexVor550/asweb03_Updated/assets/107479058/f3b638b2-7c56-4a54-ba6e-a2cc2c715fe4">
+
 
 Создаю файл `Dockerfile.httpd` со следующим содержимым:
 
@@ -138,6 +150,9 @@ networks:
 
 Данный файл объявляет структуру из трех контейнеров: http как точка входа, контейнер php-fpm и контейнер с базой данных. Для взаимодействия контейнеров объявляется также сеть `internal` с настройками по умолчанию.
 
+<img width="530" alt="2023-06-02 22_37_10-asweb03" src="https://github.com/AlexVor550/asweb03_Updated/assets/107479058/98bf4174-d7b8-4fb8-9da3-547b8d988086">
+
+
 ## Запуск и тестирование
 
 В командной строке открываю директорию с работой и выполняю команду:
@@ -145,6 +160,8 @@ networks:
 ```shell 
 docker-compose build
 ```
+<img width="851" alt="2023-06-02 22_05_03-ÐœÐµÐ»ÑŒÐ½Ð¸Ðº_ÐÐ½Ñ‚Ð¾Ð½Ð¸Ð½Ð°_Ð»Ð°Ð±3 docx и еще 8 страниц — Личный_ Microso" src="https://github.com/AlexVor550/asweb03_Updated/assets/107479058/4971aa76-835f-4bde-a4b0-ac330f7119c6">
+
 
 На основе созданных определений docker построит образы сервисов.За 5,3 секунды построились образы
 
@@ -153,6 +170,8 @@ docker-compose build
 ```shell
 docker-compose up -d
 ```
+<img width="842" alt="2023-06-02 22_05_29-ÐœÐµÐ»ÑŒÐ½Ð¸Ðº_ÐÐ½Ñ‚Ð¾Ð½Ð¸Ð½Ð°_Ð»Ð°Ð±3 docx и еще 8 страниц — Личный_ Microso" src="https://github.com/AlexVor550/asweb03_Updated/assets/107479058/689c3b35-16f7-4583-b62e-76f34d80ac31">
+
 
 На основе образов запускаются контейнеры. 
 
@@ -160,9 +179,16 @@ docker-compose up -d
 
 Имя пользователя базы данных, его пароль и название базы данных беру из файла `docker-compose.yml`
 
+<img width="680" alt="2023-06-01 16_00_54-WordPress › Setup Configuration File и еще 6 страниц — Личный_ Microsoft​ Edge" src="https://github.com/AlexVor550/asweb03_Updated/assets/107479058/c8e56e28-6a00-4d5f-9d6f-335186de7600">
+
+
 Далее прописываю имя сайта,имя пользователя и пароль для входа.
+<img width="561" alt="2023-06-01 16_01_50-WordPress › Installation и еще 6 страниц — Личный_ Microsoft​ Edge" src="https://github.com/AlexVor550/asweb03_Updated/assets/107479058/e62a0a13-e643-440c-8d9d-80c6950ec070">
+
 
 После регистрации ввожу данные с регистрации для входа и вижу приветсвенную страницу "Hello world"
+<img width="871" alt="2023-06-01 16_03_27-AlexVor и еще 6 страниц — Личный_ Microsoft​ Edge" src="https://github.com/AlexVor550/asweb03_Updated/assets/107479058/1fdd040c-5d25-4e6c-9cf3-039ffea0b245">
+
 
 Выполняю последовательно следующие команды
 
@@ -173,11 +199,15 @@ docker-compose down
 docker-compose rm
 ```
 
-Открываю в браузере страницу: http://wordpress.localhost и вижу ошибку подключения . Снова запускаю кластер контейнеров:
+Открываю в браузере страницу: http://wordpress.localhost и вижу ошибку подключения .
+
+Снова запускаю кластер контейнеров:
 
 ```shell
 docker-compose up -d
 ```
+<img width="871" alt="2023-06-01 16_03_27-AlexVor и еще 6 страниц — Личный_ Microsoft​ Edge" src="https://github.com/AlexVor550/asweb03_Updated/assets/107479058/c6c2ad4e-e4be-47fb-b715-b630a5017f40">
+
 
 Благодаря повторному запуску кластера страница: http://wordpress.localhost снова функционирует
 
